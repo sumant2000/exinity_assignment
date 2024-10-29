@@ -1,0 +1,72 @@
+openapi: 3.0.0
+info:
+  title: Payment Gateway API
+  description: API for managing deposits and withdrawals through multiple payment gateways.
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:8080
+    description: Local Development Server
+
+paths:
+  /deposit:
+    post:
+      summary: Deposit funds into an account
+      requestBody:
+        description: Deposit request object
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                amount:
+                  type: number
+                  example: 100.0
+                accountID:
+                  type: string
+                  example: "123456"
+      responses:
+        '200':
+          description: Successful deposit
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  transactionID:
+                    type: string
+                    example: "txn_1234"
+        '400':
+          description: Bad request
+
+  /withdraw:
+    post:
+      summary: Withdraw funds from an account
+      requestBody:
+        description: Withdraw request object
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                amount:
+                  type: number
+                  example: 50.0
+                accountID:
+                  type: string
+                  example: "123456"
+      responses:
+        '200':
+          description: Successful withdrawal
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  transactionID:
+                    type: string
+                    example: "txn_5678"
+        '400':
+          description: Bad request

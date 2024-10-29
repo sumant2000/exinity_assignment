@@ -1,0 +1,38 @@
+info:
+  contact: {}
+paths:
+  /deposit:
+    post:
+      consumes:
+      - application/json
+      description: Deposit funds into an account
+      parameters:
+      - description: Amount to deposit
+        in: body
+        name: amount
+        required: true
+        schema:
+          type: number
+      - description: Account ID
+        in: body
+        name: accountID
+        required: true
+        schema:
+          type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Deposit funds
+swagger: "2.0"
