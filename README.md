@@ -124,6 +124,14 @@ This will run all tests in the services, handlers, and other packages. You shoul
 
 5. Docker (Optional)
 
+docker build -t payment-gateway-service .
+
+docker run -p 8080:8080 payment-gateway-service
+
+
+docker run -p 8080:8080 -e ENV=production payment-gateway-service
+
+
 If you want to run the service inside a Docker container, you can use the provided Dockerfile.
 
 Build the Docker Image
