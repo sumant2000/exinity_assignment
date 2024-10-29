@@ -1,0 +1,28 @@
+
+services:
+  app:
+    build: .
+    container_name: payment-gateway-service
+    ports:
+      - "8080:8080"
+    environment:
+      - GIN_MODE=release  # You can set environment variables like this
+    volumes:
+      - .:/app  # Mount your project directory to the container
+    depends_on:
+      - db  # Example dependency (if you have a database service)
+
+  db:
+    image: postgres:13  # Example: PostgreSQL database (you can remove if not needed)
+    container_name: payment-gateway-db
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: payment_gateway
+    ports:
+      - "5433:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+volumes:
+  db_data:
