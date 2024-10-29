@@ -46,7 +46,18 @@ func HandleDeposit(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"transactionID": transactionID})
 }
 
-// HandleWithdraw handles withdraw requests
+// @Summary Withdraw funds from an account
+// @Description Process withdrawal transaction through a payment gateway.
+// @Tags Transactions
+// @Accept  json
+// @Produce  json
+// @Param amount body float64 true "Amount"
+// @Param accountID body string true "Account ID"
+// @Param gateway body string true "Payment Gateway (A or B)"
+// @Success 200 {object} map[string]interface{} "Successful withdrawal"
+// @Failure 400 {object} map[string]interface{} "Invalid input"
+// @Failure 500 {object} map[string]interface{} "Internal Server Error"
+// @Router /withdraw [post]
 func HandleWithdraw(c *gin.Context) {
 	var request struct {
 		Amount    float64 `json:"amount"`
@@ -71,6 +82,13 @@ func HandleWithdraw(c *gin.Context) {
 func HandleCallback(c *gin.Context) {
 	// Logic for handling gateway callbacks
 }
+
+// @Summary Health check
+// @Description Check if the service is healthy.
+// @Tags Health
+// @Produce  json
+// @Success 200 {object} map[string]string
+// @Router /health [get]
 func HealthCheck(c *gin.Context) {
 	c.JSON(200, gin.H{
 		"message": "Server is running",

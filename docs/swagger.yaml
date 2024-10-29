@@ -35,4 +35,64 @@ paths:
               type: string
             type: object
       summary: Deposit funds
+  /health:
+    get:
+      description: Check if the service is healthy.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Health check
+      tags:
+      - Health
+  /withdraw:
+    post:
+      consumes:
+      - application/json
+      description: Process withdrawal transaction through a payment gateway.
+      parameters:
+      - description: Amount
+        in: body
+        name: amount
+        required: true
+        schema:
+          type: number
+      - description: Account ID
+        in: body
+        name: accountID
+        required: true
+        schema:
+          type: string
+      - description: Payment Gateway (A or B)
+        in: body
+        name: gateway
+        required: true
+        schema:
+          type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Successful withdrawal
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Invalid input
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Withdraw funds from an account
+      tags:
+      - Transactions
 swagger: "2.0"
